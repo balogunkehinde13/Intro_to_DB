@@ -2,31 +2,31 @@
 USE alx_book_store;
 
 -- =====================================
--- 1. AUTHORS TABLE
+-- 1. Authors Table
 -- =====================================
-CREATE TABLE IF NOT EXISTS AUTHORS (
+CREATE TABLE IF NOT EXISTS Authors (
     author_id INT AUTO_INCREMENT PRIMARY KEY,
     author_name VARCHAR(215) NOT NULL
 );
 
 -- =====================================
--- 2. BOOKS TABLE
+-- 2. Books Table
 -- =====================================
-CREATE TABLE IF NOT EXISTS BOOKS (
+CREATE TABLE IF NOT EXISTS Books (
     book_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(130) NOT NULL,
     author_id INT,
     price DOUBLE NOT NULL,
     publication_date DATE,
-    FOREIGN KEY (author_id) REFERENCES AUTHORS(author_id)
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
         ON DELETE SET NULL
         ON UPDATE CASCADE
 );
 
 -- =====================================
--- 3. CUSTOMERS TABLE
+-- 3. Customers Table
 -- =====================================
-CREATE TABLE IF NOT EXISTS CUSTOMERS (
+CREATE TABLE IF NOT EXISTS Customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(215) NOT NULL,
     email VARCHAR(215) UNIQUE NOT NULL,
@@ -34,29 +34,29 @@ CREATE TABLE IF NOT EXISTS CUSTOMERS (
 );
 
 -- =====================================
--- 4. ORDERS TABLE
+-- 4. Orders Table
 -- =====================================
-CREATE TABLE IF NOT EXISTS ORDERS (
+CREATE TABLE IF NOT EXISTS Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT,
     order_date DATE NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id)
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
 -- =====================================
--- 5. ORDER_DETAILS TABLE
+-- 5. Order_Details Table
 -- =====================================
-CREATE TABLE IF NOT EXISTS ORDER_DETAILS (
+CREATE TABLE IF NOT EXISTS Order_Details (
     orderdetailid INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT,
     book_id INT,
     quantity DOUBLE NOT NULL DEFAULT 1,
-    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id)
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    FOREIGN KEY (book_id) REFERENCES BOOKS(book_id)
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );

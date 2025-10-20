@@ -1,5 +1,6 @@
--- Print the full description of the table 'books' 
--- without using DESCRIBE or EXPLAIN
+-- Print the full description of the table 'books'
+
+USE alx_book_store;
 
 SELECT 
     COLUMN_NAME,
